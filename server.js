@@ -8,10 +8,21 @@ const PORT = process.env.PORT || 4001;
 
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-	res.send("Hi there!");
-})
+app.get('/api/quotes/random', (req, res) => {
+	const quote = getRandomElement(quotes);
+	res.send({ quote: quote });
+});
 
 app.listen(PORT, () => {
 	console.log(`Listening on port ${PORT}`);
 })
+
+/*
+
+Your API should have a GET /api/quotes/random route. This route should send back a random quote from the quotes data. The response body should have the following shape:
+
+{
+	quote: { quote object }
+}
+
+*/
