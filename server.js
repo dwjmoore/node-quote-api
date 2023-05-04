@@ -13,16 +13,19 @@ app.get('/api/quotes/random', (req, res) => {
 	res.send({ quote: quote });
 });
 
+app.get('/api/quotes', (req, res) => {
+	if (req.query.person !== undefined) {
+		const quotesByPerson = quotes.filter(quote => quote.person === req.query.person);
+		res.send({
+			quotes: quotesByPerson
+		});
+	} else {
+		res.send({
+			quotes: quotes
+		});
+	}
+});
+
 app.listen(PORT, () => {
 	console.log(`Listening on port ${PORT}`);
 })
-
-/*
-
-Your API should have a GET /api/quotes/random route. This route should send back a random quote from the quotes data. The response body should have the following shape:
-
-{
-	quote: { quote object }
-}
-
-*/
